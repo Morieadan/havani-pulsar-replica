@@ -1,3 +1,4 @@
+
 /**
  * @component Index - Página principal (Landing) de Havani
  * 
@@ -9,6 +10,8 @@
 import { useEffect } from 'react';
 import HeroSection from '@/components/sections/Hero/HeroSection';
 import ValuePropSection from '@/components/sections/ValueProp/ValuePropSection';
+import ProblemSolutionSection from '@/components/sections/ProblemSolution/ProblemSolutionSection';
+import ProcessSection from '@/components/sections/Process/ProcessSection';
 
 // Este componente será un contenedor para todas las secciones
 // Se irán añadiendo las secciones a medida que se desarrollen
@@ -38,8 +41,13 @@ const Index = () => {
       {/* Sección Propuesta de Valor */}
       <ValuePropSection />
       
-      {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Problema/Solución */}
+      <ProblemSolutionSection />
+      
+      {/* Sección Proceso */}
+      <ProcessSection />
+      
+      {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Características */}
       {/* Sección Productos Insignia */}
       {/* Sección Testimonios */}
