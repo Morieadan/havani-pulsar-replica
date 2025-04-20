@@ -19,6 +19,20 @@ export default {
 		},
 		extend: {
 			colors: {
+				// Variables de color de Havani (Pulsar template)
+				'bg-body': 'var(--bg-body)', // Color de fondo principal
+				'bg-panel': 'var(--bg-panel)', // Color de fondo de paneles
+				'bg-highlight': 'var(--bg-highlight)', // Color de fondo para elementos destacados
+				'text-primary': 'var(--text-primary)', // Texto principal
+				'text-secondary': 'var(--text-secondary)', // Texto secundario
+				'text-tertiary': 'var(--text-tertiary)', // Texto terciario
+				'accent': 'var(--accent)', // Color de acento (violeta marca)
+				'priority-high': 'var(--priority-high)', // Prioridad alta (rojo)
+				'priority-medium': 'var(--priority-medium)', // Prioridad media (amarillo)
+				'priority-low': 'var(--priority-low)', // Prioridad baja (verde)
+				'success': 'var(--success)', // Éxito (verde)
+				
+				// Variables originales shadcn (mantenemos para compatibilidad)
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -69,6 +83,7 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
+				// Animaciones base de shadcn
 				'accordion-down': {
 					from: {
 						height: '0'
@@ -84,11 +99,130 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				
+				// Animaciones para Havani (Pulsar template)
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+					},
+					'100%': {
+						opacity: '1',
+					}
+				},
+				'fade-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-down': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(-20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-left': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'fade-right': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(-20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'scale-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.95)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					}
+				},
+				'scale-out': {
+					'0%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					'100%': {
+						opacity: '0',
+						transform: 'scale(0.95)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'pulse': {
+					'0%, 100%': {
+						opacity: '1'
+					},
+					'50%': {
+						opacity: '0.5'
+					}
+				},
+				'spin-slow': {
+					'0%': {
+						transform: 'rotate(0deg)'
+					},
+					'100%': {
+						transform: 'rotate(360deg)'
+					}
 				}
 			},
 			animation: {
+				// Animaciones base de shadcn
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				
+				// Animaciones para Havani (Pulsar template)
+				// Timing estándar: 0.55s ease [.25,.8,.25,1]
+				'fade-in': 'fade-in 0.55s cubic-bezier(.25,.8,.25,1)',
+				'fade-up': 'fade-up 0.55s cubic-bezier(.25,.8,.25,1)',
+				'fade-down': 'fade-down 0.55s cubic-bezier(.25,.8,.25,1)',
+				'fade-left': 'fade-left 0.55s cubic-bezier(.25,.8,.25,1)',
+				'fade-right': 'fade-right 0.55s cubic-bezier(.25,.8,.25,1)',
+				'scale-in': 'scale-in 0.55s cubic-bezier(.25,.8,.25,1)',
+				'scale-out': 'scale-out 0.55s cubic-bezier(.25,.8,.25,1)',
+				'float': 'float 3s ease-in-out infinite',
+				'pulse': 'pulse 2s cubic-bezier(.25,.8,.25,1) infinite',
+				'spin-slow': 'spin-slow 15s linear infinite',
+				
+				// Animaciones con retardo (stagger 0.15s)
+				'fade-in-0': 'fade-in 0.55s cubic-bezier(.25,.8,.25,1)',
+				'fade-in-1': 'fade-in 0.55s cubic-bezier(.25,.8,.25,1) 0.15s',
+				'fade-in-2': 'fade-in 0.55s cubic-bezier(.25,.8,.25,1) 0.3s',
+				'fade-in-3': 'fade-in 0.55s cubic-bezier(.25,.8,.25,1) 0.45s',
+				
+				'fade-up-0': 'fade-up 0.55s cubic-bezier(.25,.8,.25,1)',
+				'fade-up-1': 'fade-up 0.55s cubic-bezier(.25,.8,.25,1) 0.15s',
+				'fade-up-2': 'fade-up 0.55s cubic-bezier(.25,.8,.25,1) 0.3s',
+				'fade-up-3': 'fade-up 0.55s cubic-bezier(.25,.8,.25,1) 0.45s',
 			}
 		}
 	},

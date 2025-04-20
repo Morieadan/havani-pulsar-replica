@@ -2,91 +2,106 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Importar estilos globales de Havani (basados en Pulsar template) */
+@import './styles/globals.css';
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Paleta global de Havani (Pulsar template) */
+    --bg-body: #000000; /* Color de fondo principal */
+    --bg-panel: #15161B; /* Color de fondo de paneles */
+    --bg-highlight: #1F2026; /* Color de fondo para elementos destacados */
+    --bg-gradient-start: #060E15; /* Inicio de gradientes */
+    --bg-gradient-end: #21052F; /* Fin de gradientes */
+    --text-primary: #FFFFFF; /* Texto principal */
+    --text-secondary: #BBBBBB; /* Texto secundario */
+    --text-tertiary: #7A7A7A; /* Texto terciario */
+    --accent: #7B61FF; /* Color de acento (violeta marca) */
+    --priority-high: #FF5F5F; /* Prioridad alta (rojo) */
+    --priority-medium: #FFB020; /* Prioridad media (amarillo) */
+    --priority-low: #2ECC71; /* Prioridad baja (verde) */
+    --success: #4ADE80; /* Éxito (verde) */
+    
+    /* Variables shadcn (mantenemos para compatibilidad) */
+    --background: 0 0% 0%; /* Ajustado a negro para Havani */
+    --foreground: 0 0% 100%; /* Ajustado a blanco para Havani */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 7% 9%; /* Aproximadamente --bg-panel */
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 7% 9%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 255 100% 69%; /* Similar a --accent */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 225 6% 13%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 225 6% 13%;
+    --muted-foreground: 0 0% 73%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 255 100% 69%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%; /* Similar a --priority-high */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 225 6% 13%;
+    --input: 225 6% 13%;
+    --ring: 255 100% 69%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 255 100% 69%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 225 6% 13%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 225 6% 13%;
+    --sidebar-ring: 255 100% 69%;
   }
 
+  /* No necesitamos el tema oscuro ya que Havani siempre usa tema oscuro */
+  /* Pero lo mantenemos por compatibilidad con componentes shadcn */
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 7% 9%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 7% 9%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 255 100% 69%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 225 6% 13%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 225 6% 13%;
+    --muted-foreground: 0 0% 73%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 255 100% 69%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 225 6% 13%;
+    --input: 225 6% 13%;
+    --ring: 255 100% 69%;
+    
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 255 100% 69%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 225 6% 13%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 225 6% 13%;
+    --sidebar-ring: 255 100% 69%;
   }
 }
 
