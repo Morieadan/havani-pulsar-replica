@@ -12,7 +12,12 @@ const ValuePropSection = () => {
         // Animation will be handled by Framer Motion
       }
     },
-    { threshold: 0.5 }
+    { 
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+      once: true
+    }
   );
 
   const containerVariants = {
