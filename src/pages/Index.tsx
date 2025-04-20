@@ -8,6 +8,7 @@
 
 import { useEffect } from 'react';
 import HeroSection from '@/components/sections/Hero/HeroSection';
+import ValuePropSection from '@/components/sections/ValueProp/ValuePropSection';
 
 // Este componente será un contenedor para todas las secciones
 // Se irán añadiendo las secciones a medida que se desarrollen
@@ -34,8 +35,10 @@ const Index = () => {
       {/* Sección Hero - Implementada con el prompt específico */}
       <HeroSection />
       
-      {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Propuesta de Valor */}
+      <ValuePropSection />
+      
+      {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Problema/Solución */}
       {/* Sección Características */}
       {/* Sección Productos Insignia */}
