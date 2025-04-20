@@ -5,16 +5,15 @@
  * Incluye header con navegación, fondo con estrellas animadas, contenido principal
  * y mockup de dashboard.
  * 
- * Prompt 1 - Hero
+ * Prompt 1 - Hero v4
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useIntersection } from '@/hooks/useIntersection';
-import { ChevronRight, Play, ArrowDown } from 'lucide-react';
+import { Play, ArrowDown } from 'lucide-react';
 import Header from './Header';
 import StarsBackground from './StarsBackground';
-import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
   // Estados para animaciones
@@ -149,9 +148,12 @@ const HeroSection = () => {
       {/* Header con navegación */}
       <Header hasScrolled={hasScrolled} />
       
-      {/* Fondo de gradiente radial */}
+      {/* Fondo de gradiente radial y estrellas */}
       <div 
-        className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,#1B1540_0%,#060E15_55%,#000000_100%)]"
+        className="absolute inset-0 z-0"
+        style={{
+          background: 'radial-gradient(circle at 50% 0%, #1B1540 0%, #060E15 55%, #000000 100%)'
+        }}
         aria-hidden="true"
       >
         {/* Nebulosa glow */}
@@ -169,7 +171,7 @@ const HeroSection = () => {
         <StarsBackground />
       </div>
       
-      {/* Contenido principal - Grid */}
+      {/* Grid principal */}
       <div className="relative z-10 max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[46%_54%] gap-8 px-6 md:px-12 lg:px-24 pt-[200px] pb-[140px] lg:pt-[200px] lg:pb-[140px] md:pt-28 md:pb-24">
         
         {/* Columna izquierda - Texto */}
@@ -183,16 +185,14 @@ const HeroSection = () => {
           <motion.div 
             className="group inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-white/10 text-sm font-semibold text-white hover:bg-white/20 cursor-pointer"
             variants={badgeVariants}
-            whileHover={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.2)'
-            }}
           >
             Descubre Havani 
             <motion.span
               whileHover={{ x: 4 }}
               transition={{ duration: 0.15 }}
+              className="w-4 h-4"
             >
-              <ChevronRight className="w-4 h-4" />
+              →
             </motion.span>
           </motion.div>
           
@@ -202,7 +202,8 @@ const HeroSection = () => {
             className="mt-4 text-[clamp(44px,6vw,76px)] font-extrabold leading-[1.1] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,.5)]"
             variants={headlineVariants}
           >
-            Inteligencia Artificial para empresas
+            <span className="block">HAVANI</span>
+            <span className="block">Desarrollo Sin Tanto Rollo.</span>
           </motion.h1>
           
           {/* Subtítulo */}
@@ -210,7 +211,7 @@ const HeroSection = () => {
             className="mt-6 max-w-[540px] text-lg md:text-xl text-[#CCCCCC] tracking-tight"
             variants={subtitleVariants}
           >
-            Soluciones avanzadas de IA que transforman los procesos y la productividad empresarial con tecnología de vanguardia adaptada a tus necesidades.
+            Desarrollo a medida con un enfoque práctico y transparente. Entregamos innovación, velocidad y profesionalismo en cada línea de código.
           </motion.p>
           
           {/* Botones */}
@@ -224,7 +225,7 @@ const HeroSection = () => {
               whileTap={{ scale: 0.95 }}
               data-tooltip="Inicia tu proyecto"
             >
-              Comenzar ahora
+              Hablemos de tu Idea
             </motion.button>
             
             {/* Botón secundario */}
@@ -246,7 +247,7 @@ const HeroSection = () => {
               >
                 <Play className="w-5 h-5" />
               </motion.span>
-              Ver demo
+              Watch Video
             </motion.button>
           </motion.div>
         </motion.div>
@@ -295,7 +296,7 @@ const HeroSection = () => {
             ease: 'easeInOut'
           }
         }}
-        aria-label="scroll to next section"
+        aria-label="scroll a la siguiente sección"
       >
         <div className="w-10 h-10 rounded-full border-2 border-white/30 flex items-center justify-center">
           <ArrowDown className="w-5 h-5 text-white/70" />
