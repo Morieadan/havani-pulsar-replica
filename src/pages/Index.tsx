@@ -13,6 +13,7 @@ import ProblemSolutionSection from '@/components/sections/ProblemSolution/Proble
 import ProcessSection from '@/components/sections/Process/ProcessSection';
 import FlagshipProductsSection from '@/components/sections/FlagshipProducts/FlagshipProductsSection';
 import ServicesSection from '@/components/sections/Services/ServicesSection';
+import BenefitsSection from '@/components/sections/Benefits/BenefitsSection';
 
 // Este componente será un contenedor para todas las secciones
 // Se irán añadiendo las secciones a medida que se desarrollen
@@ -50,6 +51,9 @@ const Index = () => {
       
       {/* Sección Servicios */}
       <ServicesSection />
+      
+      {/* Sección Beneficios */}
+      <BenefitsSection />
       
       {/* Sección Productos Insignia */}
       <FlagshipProductsSection />
