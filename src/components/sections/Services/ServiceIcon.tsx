@@ -1,5 +1,5 @@
 
-import { Rocket, Robot, Laptop, Compass } from 'lucide-react';
+import { Rocket, Bot, Laptop, Compass } from 'lucide-react';
 
 interface ServiceIconProps {
   name: 'rocket' | 'robot' | 'laptop' | 'compass';
@@ -9,7 +9,7 @@ interface ServiceIconProps {
 export const ServiceIcon: React.FC<ServiceIconProps> = ({ name, className }) => {
   const icons = {
     'rocket': Rocket,
-    'robot': Robot,
+    'robot': Bot,
     'laptop': Laptop,
     'compass': Compass
   };
