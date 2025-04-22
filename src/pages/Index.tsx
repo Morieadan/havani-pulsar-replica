@@ -1,4 +1,3 @@
-
 /**
  * @component Index - Página principal (Landing) de Havani
  * 
@@ -12,6 +11,7 @@ import HeroSection from '@/components/sections/Hero/HeroSection';
 import ValuePropSection from '@/components/sections/ValueProp/ValuePropSection';
 import ProblemSolutionSection from '@/components/sections/ProblemSolution/ProblemSolutionSection';
 import ProcessSection from '@/components/sections/Process/ProcessSection';
+import FlagshipProductsSection from '@/components/sections/FlagshipProducts/FlagshipProductsSection';
 
 // Este componente será un contenedor para todas las secciones
 // Se irán añadiendo las secciones a medida que se desarrollen
@@ -47,9 +47,11 @@ const Index = () => {
       {/* Sección Proceso */}
       <ProcessSection />
       
+      {/* Sección Productos Insignia */}
+      <FlagshipProductsSection />
+      
       {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Características */}
-      {/* Sección Productos Insignia */}
       {/* Sección Testimonios */}
       {/* Sección Precios */}
       {/* Sección FAQ */}
