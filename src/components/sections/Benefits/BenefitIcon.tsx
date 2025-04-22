@@ -1,5 +1,5 @@
 
-import { Brain, Heart, HandshakePulse } from 'lucide-react';
+import { Brain, Heart, Handshake } from 'lucide-react';
 
 interface BenefitIconProps {
   name: "brain-lightning" | "clear" | "handshake-heart";
@@ -10,7 +10,7 @@ export const BenefitIcon: React.FC<BenefitIconProps> = ({ name, className }) => 
   const icons = {
     'brain-lightning': Brain,
     'clear': Heart,
-    'handshake-heart': HandshakePulse
+    'handshake-heart': Handshake
   };
 
   const IconComponent = icons[name];

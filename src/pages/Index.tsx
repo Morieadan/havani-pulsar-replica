@@ -14,9 +14,8 @@ import ProcessSection from '@/components/sections/Process/ProcessSection';
 import FlagshipProductsSection from '@/components/sections/FlagshipProducts/FlagshipProductsSection';
 import ServicesSection from '@/components/sections/Services/ServicesSection';
 import BenefitsSection from '@/components/sections/Benefits/BenefitsSection';
+import StorySection from '@/components/sections/Story/StorySection';
 
-// Este componente será un contenedor para todas las secciones
-// Se irán añadiendo las secciones a medida que se desarrollen
 const Index = () => {
   
   // Establecer el color de fondo del cuerpo y otras configuraciones globales
@@ -57,6 +56,9 @@ const Index = () => {
       
       {/* Sección Productos Insignia */}
       <FlagshipProductsSection />
+      
+      {/* Sección Historia */}
+      <StorySection />
       
       {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Características */}

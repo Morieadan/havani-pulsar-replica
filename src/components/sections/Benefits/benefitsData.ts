@@ -30,3 +30,5 @@ export const benefits: Benefit[] = [
     ariaLabel: "Beneficio: Talento experto y cercano – Equipo accesible con experiencia sólida"
   }
 ];
+
+export type { Benefit };
