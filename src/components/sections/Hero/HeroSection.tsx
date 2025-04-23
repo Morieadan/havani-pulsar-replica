@@ -1,4 +1,3 @@
-
 /**
  * @component HeroSection - Sección principal (Hero) de la landing page de Havani
  * Esta sección implementa el diseño del Hero de Pulsar adaptado a Havani.
@@ -13,7 +12,6 @@ import { motion, useAnimation } from 'framer-motion';
 import { useIntersection } from '@/hooks/useIntersection';
 import { Play, ArrowDown } from 'lucide-react';
 import Header from './Header';
-import StarsBackground from './StarsBackground';
 
 const HeroSection = () => {
   // Estados para animaciones
@@ -148,7 +146,7 @@ const HeroSection = () => {
       {/* Header con navegación */}
       <Header hasScrolled={hasScrolled} />
       
-      {/* Fondo de gradiente radial y estrellas */}
+      {/* Fondo de gradiente radial SOLO */}
       <div 
         className="absolute inset-0 z-0"
         style={{
@@ -166,9 +164,6 @@ const HeroSection = () => {
           }}
           aria-hidden="true"
         />
-        
-        {/* Capa de estrellas animadas */}
-        <StarsBackground />
       </div>
       
       {/* Grid principal */}
