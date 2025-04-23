@@ -114,3 +114,28 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* --- Testimonios bullets Swiper --- */
+.havani-swiper-bullet {
+  background: #2A2B30;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 7px !important;
+  opacity: 1 !important;
+  transition: background 0.2s, transform 0.2s;
+}
+.havani-swiper-bullet-active {
+  background: #7B61FF !important;
+  transform: scale(1.2);
+}
+.swiper:hover .swiper-button-prev,
+.swiper:hover .swiper-button-next {
+  opacity: 1;
+}
+@media (max-width: 768px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+}

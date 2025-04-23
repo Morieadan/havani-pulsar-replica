@@ -15,6 +15,8 @@ import FlagshipProductsSection from '@/components/sections/FlagshipProducts/Flag
 import ServicesSection from '@/components/sections/Services/ServicesSection';
 import BenefitsSection from '@/components/sections/Benefits/BenefitsSection';
 import StorySection from '@/components/sections/Story/StorySection';
+import TestimonialsSection from '@/components/sections/Testimonials/TestimonialsSection';
+import ComparisonSection from '@/components/sections/Comparison/ComparisonSection';
 
 const Index = () => {
   
@@ -60,9 +62,14 @@ const Index = () => {
       {/* Sección Historia */}
       <StorySection />
       
+      {/* Sección Testimonios */}
+      <TestimonialsSection />
+      
+      {/* Sección Comparativa */}
+      <ComparisonSection />
+      
       {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Características */}
-      {/* Sección Testimonios */}
       {/* Sección Precios */}
       {/* Sección FAQ */}
       {/* Sección CTA */}
