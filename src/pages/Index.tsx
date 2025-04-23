@@ -18,6 +18,7 @@ import StorySection from '@/components/sections/Story/StorySection';
 import TestimonialsSection from '@/components/sections/Testimonials/TestimonialsSection';
 import ComparisonSection from '@/components/sections/Comparison/ComparisonSection';
 import FinalCTASection from "@/components/sections/CTA/FinalCTASection";
+import FooterSection from "@/components/sections/Footer/FooterSection";
 
 const Index = () => {
   
@@ -71,6 +72,9 @@ const Index = () => {
       
       {/* SECCIÓN CTA FINAL */}
       <FinalCTASection />
+      
+      {/* Footer */}
+      <FooterSection />
       
       {/* Aquí se añadirán el resto de secciones específicas */}
       {/* Sección Características */}

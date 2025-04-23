@@ -1,4 +1,3 @@
-
 /**
  * Estilos globales para la landing page de Havani (basada en Pulsar template)
  * Estos estilos complementan Tailwind CSS con reglas específicas que no pueden
@@ -200,3 +199,96 @@ body {
     padding: 60px 16px;
   }
 }
+
+/* -------- FROM FOOTER SECTION ----------- */
+
+/* Footer link underline micro-anim and color */
+.footer-link {
+  color: #888888;
+  position: relative;
+  transition: color 0.15s;
+  text-decoration: none;
+}
+.footer-link:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: #7B61FF;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+  transform-origin: left;
+}
+.footer-link:hover {
+  color: #fff;
+}
+.footer-link:hover:after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-link:after {
+    transition: none;
+    transform: scaleX(1);
+  }
+}
+
+/* Social icon link */
+.social-link {
+  color: #888;
+  transition: color 0.18s, transform 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  outline-offset: 2px;
+}
+.social-link:hover {
+  color: #fff;
+  transform: rotate(6deg) scale(1.07);
+}
+.social-link:focus-visible {
+  outline: 2px solid #7B61FF;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .social-link {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Divider in footer already styled as border-[#2A2B30] */
+
+/* Responsive columns */
+@media (max-width: 1024px) {
+  footer nav {
+    gap-x: 32px !important;
+  }
+}
+@media (max-width: 768px) {
+  footer nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap-x: 24px !important;
+    gap-y: 48px !important;
+  }
+  footer {
+    padding-bottom: 80px !important;
+  }
+}
+@media (max-width: 480px) {
+  footer nav {
+    grid-template-columns: 1fr !important;
+    gap-y: 32px !important;
+  }
+}
+
+/* Ensure obvious visible focus for all footer links */
+.footer-link:focus-visible {
+  outline: 2px solid #7B61FF;
+  outline-offset: 2px;
+}
+
+/* -------- END FOOTER SECTION ---------- */
