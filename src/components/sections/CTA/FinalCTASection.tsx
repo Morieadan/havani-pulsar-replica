@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
@@ -302,13 +301,13 @@ export default function FinalCTASection() {
                 </AnimatePresence>
               </motion.div>
 
-              {/* Button */}
+              {/* Button - Updated text and added neon glow effect with fill animation */}
               <motion.button
                 type="submit"
                 className={`${isMobile
                   ? "w-full"
                   : "mx-auto"
-                  } mt-2 inline-flex items-center gap-2 rounded-full bg-white px-10 py-4 font-bold text-[#7B61FF] shadow-[0_8px_24px_-6px_rgba(123,97,255,.35)] transition-transform duration-200 hover:shadow-[0_0_0_4px_rgba(123,97,255,.25)] focus-visible:outline-[#7B61FF] focus-visible:outline-2 focus-visible:outline-offset-4
+                  } mt-2 inline-flex items-center gap-2 rounded-full bg-white px-10 py-4 font-bold text-[#7B61FF] shadow-[0_0_15px_rgba(123,97,255,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.6)] hover:outline-[#7B61FF] hover:outline-2 hover:outline-offset-4 relative overflow-hidden group
                 ${loading ? "opacity-70 pointer-events-none" : ""}`}
                 whileHover={
                   window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -323,8 +322,10 @@ export default function FinalCTASection() {
                 disabled={loading}
                 tabIndex={0}
               >
-                Empieza Hoy Mismo
-                {!isMobile && <ArrowRight className="w-5 h-5" aria-hidden="true" />}
+                {/* Fill animation on hover */}
+                <span className="absolute inset-0 w-0 bg-gradient-to-r from-[#7B61FF]/10 to-[#7B61FF]/40 transition-all duration-300 group-hover:w-full"></span>
+                <span className="relative z-10">Hablemos de tu Idea</span>
+                {!isMobile && <ArrowRight className="w-5 h-5 relative z-10" aria-hidden="true" />}
               </motion.button>
             </motion.form>
           ) : (

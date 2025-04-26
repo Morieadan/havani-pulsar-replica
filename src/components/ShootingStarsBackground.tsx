@@ -29,11 +29,11 @@ interface Star {
 }
 
 const generateStar = (w: number, h: number): Star => {
-  const size = Math.random() * 2 + 1.5; // Size of the "head" (2-3.5px), more evident than base
+  const size = Math.random() * 2 + 1.5; // Size of the "head" (2-3.5px)
   const angle = Math.random() * Math.PI * 0.5 - Math.PI * 0.25; // -45º a 45º
   const startX = Math.random() * w;
   const startY = Math.random() * (h * 0.85);
-  const trailLength = Math.random() * 280 + 180; // 180-460px
+  const trailLength = Math.random() * 280 + 180; // 180-460px trail length
   const speed = Math.random() * 0.6 + 0.78; // px/ms, slightly more lively
   return {
     x: startX,
@@ -66,27 +66,35 @@ const drawStar = (ctx: CanvasRenderingContext2D, star: Star) => {
   const dx = Math.cos(star.angle) * star.trailLength * star.progress;
   const dy = Math.sin(star.angle) * star.trailLength * star.progress;
 
-  // Draw trail (thin fading line)
+  // Draw trail (glowing line with fading effect)
   ctx.save();
   ctx.globalAlpha = star.opacity * 0.93;
-  ctx.strokeStyle = TRAIL_COLOR;
-  ctx.lineWidth = 1.1;
+  
+  // Create a gradient for the trail to simulate the glowing effect in the image
+  const trailGradient = ctx.createLinearGradient(star.x - dx, star.y - dy, star.x, star.y);
+  trailGradient.addColorStop(0, 'rgba(255,255,255,0)');
+  trailGradient.addColorStop(0.4, 'rgba(255,255,255,0.2)');
+  trailGradient.addColorStop(0.7, 'rgba(255,255,255,0.6)');
+  trailGradient.addColorStop(1, TRAIL_COLOR);
+  
+  ctx.strokeStyle = trailGradient;
+  ctx.lineWidth = 1.5;
   ctx.shadowColor = GLOW_COLOR;
-  ctx.shadowBlur = 7;
+  ctx.shadowBlur = 10;
   ctx.beginPath();
   ctx.moveTo(star.x - dx, star.y - dy);
   ctx.lineTo(star.x, star.y);
   ctx.stroke();
   ctx.restore();
 
-  // Draw star head (bright glow as in the reference)
+  // Draw star head (bright glow as in the reference image)
   ctx.save();
   ctx.globalAlpha = star.opacity;
   ctx.beginPath();
-  ctx.arc(star.x, star.y, star.size * 1.05, 0, Math.PI * 2);
+  ctx.arc(star.x, star.y, star.size * 1.2, 0, Math.PI * 2);
   ctx.fillStyle = STAR_COLOR;
   ctx.shadowColor = GLOW_COLOR;
-  ctx.shadowBlur = 18;
+  ctx.shadowBlur = 20;
   ctx.fill();
   ctx.restore();
 };
@@ -117,6 +125,7 @@ const ShootingStarsBackground: React.FC = () => {
 
     const canvas = canvasRef.current;
     if (!canvas) return;
+    
     let w = window.innerWidth;
     let h = window.innerHeight;
 
@@ -133,22 +142,31 @@ const ShootingStarsBackground: React.FC = () => {
     let lastTime = performance.now();
     let spawnAccumulator = 0;
 
+    // Initialize with a few stars
+    for (let i = 0; i < 5; i++) {
+      spawnStar(w, h);
+      stars[i].progress = Math.random() * 0.5; // So they don't all start at once
+    }
+
     const animate = (now: number) => {
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
-      // BG
+      
+      // Background
       drawBackgroundGradient(ctx, w, h);
 
       // New star spawn timer
       const delta = now - lastTime;
       lastTime = now;
       spawnAccumulator += delta;
-      // About every 250ms
+      
+      // About every 220ms
       if (spawnAccumulator > 220) {
         spawnStar(w, h);
         spawnAccumulator = 0;
       }
+      
       // Animate stars
       for (const star of stars) {
         star.progress += delta * star.speed / 450;
@@ -156,10 +174,11 @@ const ShootingStarsBackground: React.FC = () => {
           star.alive = false;
         }
       }
-      // Filter dead
+      
+      // Filter out dead stars
       stars = stars.filter(s => s.alive);
 
-      // Draw
+      // Draw all stars
       stars.forEach(star => {
         drawStar(ctx, star);
       });
@@ -168,6 +187,7 @@ const ShootingStarsBackground: React.FC = () => {
         animationId = requestAnimationFrame(animate);
       }
     };
+    
     animationId = requestAnimationFrame(animate);
 
     return () => {
@@ -177,20 +197,11 @@ const ShootingStarsBackground: React.FC = () => {
     };
   }, [shouldAnimate]);
 
-  // Background style: covers all, pointer-events none, fixed always, super behind
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-screen h-screen z-[-20] pointer-events-none select-none"
       aria-hidden="true"
-      style={{
-        position: "fixed",
-        left: 0, top: 0, width: "100vw", height: "100vh",
-        zIndex: -20,
-        pointerEvents: "none",
-        userSelect: "none",
-        background: "transparent",
-      }}
     />
   );
 };

@@ -10,7 +10,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 // Props para el componente Header
@@ -25,11 +24,11 @@ const Header = ({ hasScrolled }: HeaderProps) => {
   // Enlaces de navegación
   const navLinks = [
     { name: 'Home', id: 'home', href: '/' },
-    { name: 'Valor', id: 'valor', href: '/#valor' },
-    { name: 'Proceso', id: 'proceso', href: '/#proceso' },
-    { name: 'Productos', id: 'productos', href: '/#productos' },
+    { name: 'Valor', id: 'valor', href: '#valor' },
+    { name: 'Proceso', id: 'proceso', href: '#proceso' },
+    { name: 'Productos', id: 'productos', href: '#productos' },
     { name: 'Precios', id: 'precios', href: '/pricing' },
-    { name: 'Contacto', id: 'contacto', href: '/#contacto' }
+    { name: 'Contacto', id: 'contacto', href: '#final-cta' }
   ];
   
   // Estilos para los enlaces de navegación
@@ -43,6 +42,18 @@ const Header = ({ hasScrolled }: HeaderProps) => {
       transition: { 
         duration: 0.2,
         ease: [0.25, 0.8, 0.25, 1]
+      }
+    }
+  };
+
+  // Manejar el scroll al hacer clic en los enlaces
+  const handleLinkClick = (id: string, href: string) => {
+    setActiveLink(id);
+    
+    if (href.startsWith('#')) {
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
@@ -68,7 +79,7 @@ const Header = ({ hasScrolled }: HeaderProps) => {
         </Link>
         
         {/* Navegación central - Links */}
-        <nav className="hidden md:flex items-center space-x-1">
+        <nav className="flex items-center space-x-1">
           {navLinks.map((link) => (
             <Link
               key={link.id}
@@ -77,7 +88,7 @@ const Header = ({ hasScrolled }: HeaderProps) => {
                 linkStyles,
                 activeLink === link.id && "rounded-full bg-white/[.12] text-white"
               )}
-              onClick={() => setActiveLink(link.id)}
+              onClick={() => handleLinkClick(link.id, link.href)}
             >
               {link.name}
               {/* Subrayado animado en hover (solo para links no activos) */}
@@ -93,19 +104,6 @@ const Header = ({ hasScrolled }: HeaderProps) => {
             </Link>
           ))}
         </nav>
-        
-        {/* CTA - Login */}
-        <div className="flex items-center space-x-4">
-          <Link 
-            to="/login" 
-            className="hidden md:inline-block text-gray-300 hover:text-white transition-colors"
-          >
-            <span className="animated-underline">Iniciar sesión</span>
-          </Link>
-          <Button className="rounded-full px-6 py-2">
-            Comenzar
-          </Button>
-        </div>
       </div>
     </header>
   );

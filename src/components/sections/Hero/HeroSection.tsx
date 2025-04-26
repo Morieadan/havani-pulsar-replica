@@ -62,6 +62,14 @@ const HeroSection = () => {
     };
   }, [controls, hasScrolled]);
   
+  // Manejar scroll suave al hacer clic en el indicador de scroll
+  const handleScrollClick = () => {
+    const valorSection = document.getElementById('valor');
+    if (valorSection) {
+      valorSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // Variantes de animación para los distintos elementos
   const containerVariants = {
     hidden: {},
@@ -140,7 +148,7 @@ const HeroSection = () => {
   return (
     <section 
       ref={elementRef}
-      className="relative w-full min-h-[100vh] lg:min-h-[100vh] md:min-h-[120vh] overflow-hidden flex flex-col bg-black"
+      className="relative w-full min-h-[100vh] lg:min-h-[100vh] md:min-h-[120vh] overflow-hidden flex flex-col"
       id="hero"
     >
       {/* Header con navegación */}
@@ -150,7 +158,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          background: 'radial-gradient(circle at 50% 0%, #1B1540 0%, #060E15 55%, #000000 100%)'
+          background: 'transparent' // Removed gradient since we have ShootingStarsBackground
         }}
         aria-hidden="true"
       >
@@ -211,16 +219,18 @@ const HeroSection = () => {
           
           {/* Botones */}
           <motion.div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-10">
-            {/* Botón primario */}
+            {/* Botón primario - Updated with neon glow and fill animation */}
             <motion.button
-              className="px-8 py-4 rounded-full bg-white text-[#7B61FF] font-bold shadow-[0_8px_24px_-4px_rgba(123,97,255,.35)] transition-transform focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#7B61FF]"
+              className="px-8 py-4 rounded-full bg-white text-[#7B61FF] font-bold shadow-[0_0_15px_rgba(123,97,255,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.6)] hover:outline-[#7B61FF] hover:outline-2 hover:outline-offset-4 relative overflow-hidden group"
               variants={buttonVariants}
               custom={0}
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.95 }}
               data-tooltip="Inicia tu proyecto"
             >
-              Hablemos de tu Idea
+              {/* Fill animation on hover */}
+              <span className="absolute inset-0 w-0 bg-gradient-to-r from-[#7B61FF]/10 to-[#7B61FF]/40 transition-all duration-300 group-hover:w-full"></span>
+              <span className="relative z-10">Hablemos de tu Idea</span>
             </motion.button>
             
             {/* Botón secundario */}
@@ -281,7 +291,7 @@ const HeroSection = () => {
       {/* Indicador de scroll */}
       <motion.div
         ref={scrollIndicatorRef}
-        className="absolute left-1/2 translate-x-[-50%] bottom-8 z-20 flex items-center justify-center"
+        className="absolute left-1/2 translate-x-[-50%] bottom-8 z-20 flex items-center justify-center cursor-pointer"
         animate={{ 
           y: [0, 8, 0],
           transition: {
@@ -291,6 +301,7 @@ const HeroSection = () => {
             ease: 'easeInOut'
           }
         }}
+        onClick={handleScrollClick}
         aria-label="scroll a la siguiente sección"
       >
         <div className="w-10 h-10 rounded-full border-2 border-white/30 flex items-center justify-center">

@@ -1,3 +1,4 @@
+
 /**
  * @component App - Componente principal de la aplicación Havani
  * Este componente configura el enrutamiento y los proveedores globales para la aplicación.
@@ -24,6 +25,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <>
+    {/* ShootingStarsBackground should be the first element for proper layering */}
     <ShootingStarsBackground />
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
