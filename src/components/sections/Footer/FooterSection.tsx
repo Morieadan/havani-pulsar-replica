@@ -1,7 +1,15 @@
 
-import { Twitter, Linkedin } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+/**
+ * @component FooterSection
+ * 
+ * Footer principal de la aplicación que contiene:
+ * - Enlaces de navegación organizados en columnas
+ * - Enlaces a redes sociales
+ * - Información legal y de copyright
+ * - Animaciones y micro-interacciones en los enlaces
+ */
 
+// Configuración de las columnas del footer
 const footerColumns = [
   {
     title: "Producto",
@@ -49,7 +57,7 @@ const footerColumns = [
   },
 ];
 
-// Animación columns stagger
+// Variantes de animación para las columnas
 const colVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({

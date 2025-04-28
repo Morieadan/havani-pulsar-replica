@@ -1,11 +1,21 @@
+
+/**
+ * @component FinalCTASection
+ * Sección final de llamada a la acción (CTA)
+ * Implementa un formulario de contacto con validación y animaciones
+ * siguiendo el diseño de Pulsar adaptado a Havani
+ */
+
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
 
+// Estilos base para los campos de entrada
 const inputBaseStyle =
   "w-full rounded-xl bg-[#15161B]/50 border border-white/10 px-6 py-4 text-white placeholder:text-[#7A7A7A] focus:border-[#7B61FF] focus:ring-2 focus:ring-[#7B61FF]/40 transition outline-none";
 const inputMobileStyle = "px-4 py-3";
 
+// Función de validación de email
 function validateEmail(email: string) {
   return /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(email);
 }
