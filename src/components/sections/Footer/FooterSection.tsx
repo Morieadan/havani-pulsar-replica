@@ -9,6 +9,9 @@
  * - Animaciones y micro-interacciones en los enlaces
  */
 
+import { motion } from "framer-motion"; // Importar motion de framer-motion para animaciones
+import { Twitter, Linkedin } from "lucide-react"; // Importar iconos de redes sociales
+
 // Configuración de las columnas del footer
 const footerColumns = [
   {
