@@ -1,3 +1,4 @@
+
 /**
  * @component HeroSection - Sección principal (Hero) de la landing page de Havani
  * Esta sección implementa el diseño del Hero de Pulsar adaptado a Havani.
@@ -154,25 +155,18 @@ const HeroSection = () => {
       {/* Header con navegación */}
       <Header hasScrolled={hasScrolled} />
       
-      {/* Fondo de gradiente radial SOLO */}
+      {/* Nota: El fondo de estrellas se maneja globalmente desde App.tsx */}
+      
+      {/* Nebulosa glow */}
       <div 
-        className="absolute inset-0 z-0"
+        className="absolute -top-[50%] left-1/2 -translate-x-1/2 w-[180%] h-[140%] z-0"
         style={{
-          background: 'transparent' // Removed gradient since we have ShootingStarsBackground
+          background: '#7B61FF33',
+          filter: 'blur(160px)',
+          mixBlendMode: 'normal'
         }}
         aria-hidden="true"
-      >
-        {/* Nebulosa glow */}
-        <div 
-          className="absolute -top-[50%] left-1/2 -translate-x-1/2 w-[180%] h-[140%] z-0"
-          style={{
-            background: '#7B61FF33',
-            filter: 'blur(160px)',
-            mixBlendMode: 'normal'
-          }}
-          aria-hidden="true"
-        />
-      </div>
+      />
       
       {/* Grid principal */}
       <div className="relative z-10 max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[46%_54%] gap-8 px-6 md:px-12 lg:px-24 pt-[200px] pb-[140px] lg:pt-[200px] lg:pb-[140px] md:pt-28 md:pb-24">

@@ -25,7 +25,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <>
-    {/* ShootingStarsBackground should be the first element for proper layering */}
+    {/* El componente ShootingStarsBackground debe ser el primer elemento para una correcta superposición de capas */}
     <ShootingStarsBackground />
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
