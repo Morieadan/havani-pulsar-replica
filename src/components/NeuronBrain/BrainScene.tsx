@@ -71,6 +71,8 @@ const BrainScene = () => {
       return () => cancelAnimationFrame(frame);
     }
   }, []);
+
+  console.log("BrainScene rendering with mousePosition:", mousePosition);
   
   return (
     <div 
@@ -87,6 +89,10 @@ const BrainScene = () => {
           powerPreference: 'high-performance' 
         }}
       >
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
+        <pointLight position={[-10, -10, -10]} />
+        
         <BrainParticles mousePosition={mousePosition} />
       </Canvas>
     </div>

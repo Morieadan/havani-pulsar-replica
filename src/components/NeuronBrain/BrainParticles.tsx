@@ -30,6 +30,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
   
   // Crear posiciones originales y posiciones de dispersión para las partículas
   const { positions, originalPositions, dispersedPositions, colors, indices } = useMemo(() => {
+    console.log("Creating brain particles");
     // Creamos arrays para almacenar las posiciones y colores
     const positions = new Float32Array(PARTICLE_COUNT * 3);
     const originalPositions = new Float32Array(PARTICLE_COUNT * 3);
@@ -101,6 +102,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
     
     // Actualizar el estado de dispersión progresivamente
     setDispersion(targetDispersion);
+    console.log("Mouse position updated:", mousePosition, "Dispersion:", targetDispersion);
   }, [mousePosition]);
   
   // Animación del cerebro en cada frame
@@ -176,9 +178,6 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
           />
         </points>
       </group>
-
-      {/* Luz ambiente para mejorar visibilidad */}
-      <ambientLight intensity={0.5} />
 
       {/* Luz puntual para efecto de brillo */}
       <pointLight position={[10, 10, 10]} intensity={1.5} color="#ff3030" />

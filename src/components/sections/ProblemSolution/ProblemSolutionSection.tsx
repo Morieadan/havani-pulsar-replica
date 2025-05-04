@@ -14,6 +14,7 @@ const ProblemSolutionSection = () => {
   const sectionRef = useIntersection(
     (entry) => {
       // Activar animaciones cuando la sección sea visible
+      console.log("ProblemSolutionSection is visible", entry);
     },
     { 
       root: null,
@@ -40,11 +41,13 @@ const ProblemSolutionSection = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.8, 0.25, 1] } }
   };
 
+  console.log("Rendering ProblemSolutionSection");
+
   return (
     <section
       ref={sectionRef}
       id="problem-solution"
-      className="relative bg-[#080811] overflow-hidden"
+      className="relative bg-[#080811] min-h-[800px] overflow-hidden"
     >
       {/* Contenedor para la animación 3D del cerebro */}
       <div className="absolute inset-0 w-full h-full">
