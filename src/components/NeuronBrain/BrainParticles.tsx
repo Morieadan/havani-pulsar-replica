@@ -6,9 +6,8 @@
  */
 
 import { useRef, useState, useMemo, useEffect } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 // Número de partículas para renderizar el cerebro
 const PARTICLE_COUNT = 15000;
@@ -28,9 +27,6 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
   
   // Estado para la dispersión actual (0 = cerebro formado, 1 = totalmente disperso)
   const [dispersion, setDispersion] = useState(0);
-  
-  // Obtener el contexto de la escena para adaptar la escala
-  const { viewport } = useThree();
   
   // Crear posiciones originales y posiciones de dispersión para las partículas
   const { positions, originalPositions, dispersedPositions, colors, indices } = useMemo(() => {
@@ -112,7 +108,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
     if (!particlesRef.current) return;
     
     // Obtener buffer de posiciones actual
-    const positionsArray = particlesRef.current.geometry.attributes.position.array;
+    const positionsArray = particlesRef.current.geometry.attributes.position.array as Float32Array;
     
     // Actualizar cada partícula interpolando entre posición original y dispersa
     for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -149,15 +145,6 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
   
   return (
     <>
-      {/* Efectos de post-procesamiento */}
-      <EffectComposer>
-        <Bloom 
-          luminanceThreshold={0.2}
-          luminanceSmoothing={0.9}
-          intensity={1.5}
-        />
-      </EffectComposer>
-      
       {/* Grupo contenedor del cerebro */}
       <group ref={groupRef}>
         <points ref={particlesRef}>
@@ -189,6 +176,12 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
           />
         </points>
       </group>
+
+      {/* Luz ambiente para mejorar visibilidad */}
+      <ambientLight intensity={0.5} />
+
+      {/* Luz puntual para efecto de brillo */}
+      <pointLight position={[10, 10, 10]} intensity={1.5} color="#ff3030" />
     </>
   );
 };
