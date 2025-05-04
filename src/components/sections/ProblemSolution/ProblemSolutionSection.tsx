@@ -50,16 +50,16 @@ const ProblemSolutionSection = () => {
       className="relative bg-[#080811] min-h-[800px] overflow-hidden"
     >
       {/* Contenedor para la animación 3D del cerebro */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full z-0">
         <BrainScene />
       </div>
       
       {/* Capa superpuesta semitransparente para mejorar legibilidad */}
-      <div className="absolute inset-0 bg-[#060E15] bg-opacity-75 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-[#060E15] bg-opacity-70 backdrop-blur-sm z-10"></div>
       
       {/* Contenido principal */}
       <motion.div
-        className="relative z-10 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-40"
+        className="relative z-20 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-40"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

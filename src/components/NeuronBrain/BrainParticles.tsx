@@ -10,9 +10,9 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 // Número de partículas para renderizar el cerebro
-const PARTICLE_COUNT = 15000;
+const PARTICLE_COUNT = 7500; // Reducido para mejor rendimiento
 // Distancia máxima de dispersión al alejar el cursor
-const MAX_DISPERSION = 8;
+const MAX_DISPERSION = 5;
 // Velocidad de transición entre estados
 const TRANSITION_SPEED = 0.05;
 
@@ -41,12 +41,11 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
     // Generar forma base del cerebro (esfera distorsionada)
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       // Distribución en forma esférica distorsionada para simular cerebro
-      // Técnica de muestreo de puntos en esfera con noise para crear forma orgánica
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos((Math.random() * 2) - 1);
       
       // Radio base con variación para crear la forma del cerebro
-      const radius = 2 + Math.random() * 0.2;
+      const radius = 1.5 + Math.random() * 0.2;
       
       // Añadir distorsión para crear las "arrugas" y lóbulos del cerebro
       const noise = Math.sin(theta * 8) * 0.15 + Math.sin(phi * 6) * 0.15;
@@ -73,7 +72,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       dispersedPositions[i * 3 + 2] = disperseVector.z * (1 + Math.random() * 0.5);
       
       // Color rojo neón con variación
-      const intensity = 0.6 + Math.random() * 0.4; // Variar intensidad para efecto profundidad
+      const intensity = 0.7 + Math.random() * 0.3; // Mayor intensidad para mejor visibilidad
       colors[i * 3] = 1.0 * intensity; // R (rojo máximo)
       colors[i * 3 + 1] = 0.2 * intensity; // G (un poco de verde para naranja)
       colors[i * 3 + 2] = 0.2 * intensity; // B (un poco de azul para brillar)
@@ -106,7 +105,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
   }, [mousePosition]);
   
   // Animación del cerebro en cada frame
-  useFrame(() => {
+  useFrame((state) => {
     if (!particlesRef.current) return;
     
     // Obtener buffer de posiciones actual
@@ -141,7 +140,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
     
     // Rotación suave del cerebro
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.002;
+      groupRef.current.rotation.y += 0.005; // Rotación más rápida para que sea visible
     }
   });
   
@@ -170,17 +169,17 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
             />
           </bufferGeometry>
           <pointsMaterial
-            size={0.05}
+            size={0.08} // Partículas más grandes para mejor visibilidad
             vertexColors
             transparent
-            opacity={0.8}
+            opacity={0.9}
             sizeAttenuation
           />
         </points>
       </group>
 
       {/* Luz puntual para efecto de brillo */}
-      <pointLight position={[10, 10, 10]} intensity={1.5} color="#ff3030" />
+      <pointLight position={[10, 10, 10]} intensity={2} color="#ff3030" />
     </>
   );
 };

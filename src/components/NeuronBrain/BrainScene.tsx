@@ -17,8 +17,10 @@ const BrainScene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Hook para detectar cuando el componente está visible
-  const isVisible = useIntersection(
-    (entry) => {},
+  const ref = useIntersection(
+    (entry) => {
+      console.log("BrainScene is visible:", entry.isIntersecting);
+    },
     { 
       root: null,
       rootMargin: "0px",
@@ -50,7 +52,7 @@ const BrainScene = () => {
     };
   }, []);
   
-  // Para dispositivos táctiles, usar un valor predeterminado
+  // Para dispositivos táctiles, usar una animación automática
   useEffect(() => {
     // Detectar si es dispositivo táctil
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -76,9 +78,23 @@ const BrainScene = () => {
   
   return (
     <div 
-      ref={containerRef}
-      className="absolute inset-0 w-full h-full overflow-hidden"
-      style={{ zIndex: 0 }}
+      ref={(el) => {
+        // Asignar la ref tanto al contenedor como al hook de intersección
+        containerRef.current = el as HTMLDivElement;
+        if (typeof ref === 'function') {
+          ref(el);
+        } else if (ref) {
+          ref.current = el;
+        }
+      }}
+      className="absolute inset-0 w-full h-full z-0 overflow-hidden"
+      style={{ 
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%'
+      }}
     >
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
@@ -86,8 +102,10 @@ const BrainScene = () => {
         gl={{ 
           antialias: true,
           alpha: true,
-          powerPreference: 'high-performance' 
+          powerPreference: 'high-performance',
+          preserveDrawingBuffer: true
         }}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
       >
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
