@@ -19,12 +19,17 @@ const BrainScene = () => {
   // Hook para detectar cuando el componente está visible
   const isVisible = useIntersection(
     (entry) => {},
-    { threshold: 0.1, once: false }
+    { 
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1, 
+      once: false 
+    }
   );
   
   // Manejar movimiento del ratón
   useEffect(() => {
-    const handleMouseMove = (event) => {
+    const handleMouseMove = (event: MouseEvent) => {
       if (!containerRef.current) return;
       
       // Obtener dimensiones y posición del contenedor
@@ -52,7 +57,7 @@ const BrainScene = () => {
     
     if (isTouchDevice) {
       // En dispositivos táctiles, configurar una animación automática
-      let frame;
+      let frame: number;
       const animate = () => {
         const time = Date.now() * 0.001;
         // Simular movimiento circular del mouse

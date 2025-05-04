@@ -7,10 +7,8 @@
 
 import { useRef, useState, useMemo, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
-import { Vector3 } from 'three';
 
 // Número de partículas para renderizar el cerebro
 const PARTICLE_COUNT = 15000;
@@ -19,10 +17,14 @@ const MAX_DISPERSION = 8;
 // Velocidad de transición entre estados
 const TRANSITION_SPEED = 0.05;
 
-const BrainParticles = ({ mousePosition }) => {
+interface BrainParticlesProps {
+  mousePosition: { x: number; y: number };
+}
+
+const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
   // Referencias para el grupo y las partículas
-  const groupRef = useRef();
-  const particlesRef = useRef();
+  const groupRef = useRef<THREE.Group>(null);
+  const particlesRef = useRef<THREE.Points>(null);
   
   // Estado para la dispersión actual (0 = cerebro formado, 1 = totalmente disperso)
   const [dispersion, setDispersion] = useState(0);
@@ -68,7 +70,7 @@ const BrainParticles = ({ mousePosition }) => {
       positions[i * 3 + 2] = originalPositions[i * 3 + 2];
       
       // Posiciones dispersas (cuando el cerebro se desintegra)
-      const disperseVector = new Vector3(x, y, z).normalize().multiplyScalar(MAX_DISPERSION);
+      const disperseVector = new THREE.Vector3(x, y, z).normalize().multiplyScalar(MAX_DISPERSION);
       dispersedPositions[i * 3] = disperseVector.x * (1 + Math.random() * 0.5);
       dispersedPositions[i * 3 + 1] = disperseVector.y * (1 + Math.random() * 0.5);
       dispersedPositions[i * 3 + 2] = disperseVector.z * (1 + Math.random() * 0.5);
