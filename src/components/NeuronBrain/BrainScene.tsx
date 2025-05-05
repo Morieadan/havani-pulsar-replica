@@ -17,17 +17,15 @@ const BrainScene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Hook para detectar cuando el componente está visible
-  const ref = useIntersection(
-    (entry) => {
+  const isInView = useIntersection({
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+    once: false,
+    onChange: (entry) => {
       console.log("BrainScene is visible:", entry.isIntersecting);
-    },
-    { 
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1, 
-      once: false 
     }
-  );
+  });
   
   // Manejar movimiento del ratón
   useEffect(() => {
@@ -78,15 +76,7 @@ const BrainScene = () => {
   
   return (
     <div 
-      ref={(el) => {
-        // Asignar la ref tanto al contenedor como al hook de intersección
-        containerRef.current = el as HTMLDivElement;
-        if (typeof ref === 'function') {
-          ref(el);
-        } else if (ref) {
-          ref.current = el;
-        }
-      }}
+      ref={containerRef}
       className="absolute inset-0 w-full h-full z-0 overflow-hidden"
       style={{ 
         position: 'absolute',
