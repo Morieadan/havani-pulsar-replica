@@ -16,16 +16,21 @@ const BrainScene = () => {
   // Referencia al contenedor para calcular posiciones relativas
   const containerRef = useRef<HTMLDivElement>(null);
   
+  // Callback para el hook useIntersection
+  const handleIntersection = (entry: IntersectionObserverEntry) => {
+    console.log("BrainScene is visible:", entry.isIntersecting);
+  };
+  
   // Hook para detectar cuando el componente está visible
-  const isInView = useIntersection({
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.1,
-    once: false,
-    onChange: (entry) => {
-      console.log("BrainScene is visible:", entry.isIntersecting);
+  const elementRef = useIntersection(
+    handleIntersection,
+    {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+      once: false
     }
-  });
+  );
   
   // Manejar movimiento del ratón
   useEffect(() => {
@@ -74,9 +79,19 @@ const BrainScene = () => {
 
   console.log("BrainScene rendering with mousePosition:", mousePosition);
   
+  // Configurar ref para el contenedor
+  const setRefs = (el: HTMLDivElement | null) => {
+    // Asignar la ref al contenedor
+    containerRef.current = el;
+    // Asignar la ref para el hook de intersección
+    if (elementRef) {
+      (elementRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    }
+  };
+  
   return (
     <div 
-      ref={containerRef}
+      ref={setRefs}
       className="absolute inset-0 w-full h-full z-0 overflow-hidden"
       style={{ 
         position: 'absolute',
