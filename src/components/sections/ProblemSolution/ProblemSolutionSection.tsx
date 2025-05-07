@@ -11,11 +11,13 @@ import { useIntersection } from '@/hooks/useIntersection';
 import BrainScene from '@/components/NeuronBrain/BrainScene';
 
 const ProblemSolutionSection = () => {
+  const handleIntersection = (entry: IntersectionObserverEntry) => {
+    // Activar animaciones cuando la sección sea visible
+    console.log("ProblemSolutionSection is visible", entry.isIntersecting);
+  };
+
   const sectionRef = useIntersection(
-    (entry) => {
-      // Activar animaciones cuando la sección sea visible
-      console.log("ProblemSolutionSection is visible", entry);
-    },
+    handleIntersection,
     { 
       root: null,
       rootMargin: '0px',
@@ -49,15 +51,15 @@ const ProblemSolutionSection = () => {
       id="problem-solution"
       className="relative bg-[#080811] min-h-[800px] overflow-hidden"
     >
-      {/* Contenedor para la animación 3D del cerebro */}
-      <div className="absolute inset-0 w-full h-full z-0">
+      {/* Contenedor para la animación 3D del cerebro - z-index ajustado para asegurar visibilidad */}
+      <div className="absolute inset-0 w-full h-full z-5">
         <BrainScene />
       </div>
       
-      {/* Capa superpuesta semitransparente para mejorar legibilidad */}
-      <div className="absolute inset-0 bg-[#060E15] bg-opacity-70 backdrop-blur-sm z-10"></div>
+      {/* Capa superpuesta semitransparente para mejorar legibilidad - opacidad reducida */}
+      <div className="absolute inset-0 bg-[#060E15] bg-opacity-60 backdrop-blur-sm z-15"></div>
       
-      {/* Contenido principal */}
+      {/* Contenido principal - z-index incrementado para estar por encima del cerebro */}
       <motion.div
         className="relative z-20 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-40"
         variants={containerVariants}

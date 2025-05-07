@@ -92,7 +92,7 @@ const BrainScene = () => {
   return (
     <div 
       ref={setRefs}
-      className="absolute inset-0 w-full h-full z-0 overflow-hidden"
+      className="absolute inset-0 w-full h-full z-10" // Aumentado z-index para asegurar visibilidad
       style={{ 
         position: 'absolute',
         top: 0,
@@ -102,7 +102,7 @@ const BrainScene = () => {
       }}
     >
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 50 }}
+        camera={{ position: [0, 0, 8], fov: 60 }} // Aumentado FOV para mejor visibilidad
         dpr={[1, 2]} // Optimizar rendimiento en dispositivos de alta densidad
         gl={{ 
           antialias: true,
@@ -110,11 +110,18 @@ const BrainScene = () => {
           powerPreference: 'high-performance',
           preserveDrawingBuffer: true
         }}
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        style={{ 
+          position: 'absolute', 
+          top: 0, 
+          left: 0, 
+          width: '100%', 
+          height: '100%',
+          pointerEvents: 'auto' // Asegurar que recibe eventos
+        }}
       >
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-        <pointLight position={[-10, -10, -10]} />
+        <ambientLight intensity={1.0} /> {/* Aumentada intensidad para mejor visibilidad */}
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} /> {/* Aumentada intensidad */}
+        <pointLight position={[-10, -10, -10]} intensity={1.2} /> {/* Aumentada intensidad */}
         
         <BrainParticles mousePosition={mousePosition} />
       </Canvas>

@@ -45,7 +45,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       const phi = Math.acos((Math.random() * 2) - 1);
       
       // Radio base con variación para crear la forma del cerebro
-      const radius = 1.5 + Math.random() * 0.2;
+      const radius = 2.0 + Math.random() * 0.3; // Aumentado tamaño base
       
       // Añadir distorsión para crear las "arrugas" y lóbulos del cerebro
       const noise = Math.sin(theta * 8) * 0.15 + Math.sin(phi * 6) * 0.15;
@@ -71,11 +71,11 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       dispersedPositions[i * 3 + 1] = disperseVector.y * (1 + Math.random() * 0.5);
       dispersedPositions[i * 3 + 2] = disperseVector.z * (1 + Math.random() * 0.5);
       
-      // Color rojo neón con variación
-      const intensity = 0.7 + Math.random() * 0.3; // Mayor intensidad para mejor visibilidad
+      // Color rojo neón con variación - Aumentada intensidad para mejor visibilidad
+      const intensity = 0.9 + Math.random() * 0.3; // Mayor intensidad para mejor visibilidad
       colors[i * 3] = 1.0 * intensity; // R (rojo máximo)
-      colors[i * 3 + 1] = 0.2 * intensity; // G (un poco de verde para naranja)
-      colors[i * 3 + 2] = 0.2 * intensity; // B (un poco de azul para brillar)
+      colors[i * 3 + 1] = 0.3 * intensity; // G (un poco de verde para naranja)
+      colors[i * 3 + 2] = 0.3 * intensity; // B (un poco de azul para brillar)
       
       indices[i] = i;
     }
@@ -169,17 +169,18 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
             />
           </bufferGeometry>
           <pointsMaterial
-            size={0.08} // Partículas más grandes para mejor visibilidad
+            size={0.12} // Partículas más grandes para mejor visibilidad
             vertexColors
             transparent
-            opacity={0.9}
+            opacity={1.0} // Aumentada opacidad para mejor visibilidad
             sizeAttenuation
           />
         </points>
       </group>
 
-      {/* Luz puntual para efecto de brillo */}
-      <pointLight position={[10, 10, 10]} intensity={2} color="#ff3030" />
+      {/* Luces adicionales para mejor visibilidad */}
+      <pointLight position={[10, 10, 10]} intensity={3} color="#ff5050" />
+      <pointLight position={[-10, -10, 10]} intensity={2} color="#ff3030" />
     </>
   );
 };
