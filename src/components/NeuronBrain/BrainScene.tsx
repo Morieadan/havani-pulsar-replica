@@ -39,6 +39,7 @@ const BrainScene = () => {
       
       // Obtener dimensiones y posición del contenedor
       const rect = containerRef.current.getBoundingClientRect();
+      console.log("Container dimensions:", rect.width, rect.height, rect.left, rect.top);
       
       // Calcular posición normalizada del ratón relativa al centro del contenedor
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
@@ -77,6 +78,14 @@ const BrainScene = () => {
     }
   }, []);
 
+  // Verificar que el componente se está montando correctamente
+  useEffect(() => {
+    console.log("BrainScene mounted, container ref:", containerRef.current ? "exists" : "null");
+    return () => {
+      console.log("BrainScene unmounted");
+    };
+  }, []);
+
   console.log("BrainScene rendering with mousePosition:", mousePosition);
   
   // Configurar ref para el contenedor
@@ -92,17 +101,18 @@ const BrainScene = () => {
   return (
     <div 
       ref={setRefs}
-      className="absolute inset-0 w-full h-full z-10" // Aumentado z-index para asegurar visibilidad
+      className="absolute inset-0 w-full h-full z-20" // Aumentado z-index para asegurar visibilidad
       style={{ 
         position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
-        height: '100%'
+        height: '100%',
+        pointerEvents: 'none' // Permitir clicks a través del contenedor
       }}
     >
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }} // Aumentado FOV para mejor visibilidad
+        camera={{ position: [0, 0, 8], fov: 60 }}
         dpr={[1, 2]} // Optimizar rendimiento en dispositivos de alta densidad
         gl={{ 
           antialias: true,
@@ -119,9 +129,9 @@ const BrainScene = () => {
           pointerEvents: 'auto' // Asegurar que recibe eventos
         }}
       >
-        <ambientLight intensity={1.0} /> {/* Aumentada intensidad para mejor visibilidad */}
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} /> {/* Aumentada intensidad */}
-        <pointLight position={[-10, -10, -10]} intensity={1.2} /> {/* Aumentada intensidad */}
+        <ambientLight intensity={2.0} /> {/* Aumentada intensidad para mejor visibilidad */}
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2.5} /> {/* Aumentada intensidad */}
+        <pointLight position={[-10, -10, -10]} intensity={2.2} /> {/* Aumentada intensidad */}
         
         <BrainParticles mousePosition={mousePosition} />
       </Canvas>

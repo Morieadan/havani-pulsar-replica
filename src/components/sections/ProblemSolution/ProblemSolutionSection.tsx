@@ -5,7 +5,7 @@
  * Incluye una animación 3D interactiva de cerebro con partículas
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useIntersection } from '@/hooks/useIntersection';
 import BrainScene from '@/components/NeuronBrain/BrainScene';
@@ -25,6 +25,14 @@ const ProblemSolutionSection = () => {
       once: true
     }
   );
+  
+  // Verificar que la sección se monta correctamente
+  useEffect(() => {
+    console.log("ProblemSolutionSection mounted");
+    return () => {
+      console.log("ProblemSolutionSection unmounted");
+    };
+  }, []);
   
   // Variantes para animaciones de Framer Motion
   const containerVariants = {
@@ -51,17 +59,17 @@ const ProblemSolutionSection = () => {
       id="problem-solution"
       className="relative bg-[#080811] min-h-[800px] overflow-hidden"
     >
-      {/* Contenedor para la animación 3D del cerebro - z-index ajustado para asegurar visibilidad */}
-      <div className="absolute inset-0 w-full h-full z-5">
+      {/* Contenedor para la animación 3D del cerebro */}
+      <div className="absolute inset-0 w-full h-full">
         <BrainScene />
       </div>
       
       {/* Capa superpuesta semitransparente para mejorar legibilidad - opacidad reducida */}
-      <div className="absolute inset-0 bg-[#060E15] bg-opacity-60 backdrop-blur-sm z-15"></div>
+      <div className="absolute inset-0 bg-[#060E15] bg-opacity-30 backdrop-blur-[2px] z-10"></div>
       
       {/* Contenido principal - z-index incrementado para estar por encima del cerebro */}
       <motion.div
-        className="relative z-20 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-40"
+        className="relative z-30 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-40"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -105,7 +113,7 @@ const ProblemSolutionSection = () => {
                   description: "Software con más funciones de las necesarias, difícil de usar"
                 }
               ].map((problem, i) => (
-                <div key={i} className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                <div key={i} className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/10">
                   <h4 className="text-white font-semibold mb-2">{problem.title}</h4>
                   <p className="text-[#BBBBBB]">{problem.description}</p>
                 </div>

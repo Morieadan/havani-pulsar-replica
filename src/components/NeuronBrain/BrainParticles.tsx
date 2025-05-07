@@ -72,7 +72,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       dispersedPositions[i * 3 + 2] = disperseVector.z * (1 + Math.random() * 0.5);
       
       // Color rojo neón con variación - Aumentada intensidad para mejor visibilidad
-      const intensity = 0.9 + Math.random() * 0.3; // Mayor intensidad para mejor visibilidad
+      const intensity = 0.95 + Math.random() * 0.5; // Mayor intensidad para mejor visibilidad
       colors[i * 3] = 1.0 * intensity; // R (rojo máximo)
       colors[i * 3 + 1] = 0.3 * intensity; // G (un poco de verde para naranja)
       colors[i * 3 + 2] = 0.3 * intensity; // B (un poco de azul para brillar)
@@ -106,7 +106,10 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
   
   // Animación del cerebro en cada frame
   useFrame((state) => {
-    if (!particlesRef.current) return;
+    if (!particlesRef.current) {
+      console.log("particlesRef is null in useFrame");
+      return;
+    }
     
     // Obtener buffer de posiciones actual
     const positionsArray = particlesRef.current.geometry.attributes.position.array as Float32Array;
@@ -143,6 +146,14 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       groupRef.current.rotation.y += 0.005; // Rotación más rápida para que sea visible
     }
   });
+
+  // Verificar que el componente se monta y actualiza correctamente
+  useEffect(() => {
+    console.log("BrainParticles mounted with", PARTICLE_COUNT, "particles");
+    return () => {
+      console.log("BrainParticles unmounted");
+    };
+  }, []);
   
   return (
     <>
@@ -169,18 +180,18 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
             />
           </bufferGeometry>
           <pointsMaterial
-            size={0.12} // Partículas más grandes para mejor visibilidad
+            size={0.15} // Partículas más grandes para mejor visibilidad
             vertexColors
             transparent
-            opacity={1.0} // Aumentada opacidad para mejor visibilidad
+            opacity={1.0} 
             sizeAttenuation
           />
         </points>
       </group>
 
       {/* Luces adicionales para mejor visibilidad */}
-      <pointLight position={[10, 10, 10]} intensity={3} color="#ff5050" />
-      <pointLight position={[-10, -10, 10]} intensity={2} color="#ff3030" />
+      <pointLight position={[10, 10, 10]} intensity={4} color="#ff5050" />
+      <pointLight position={[-10, -10, 10]} intensity={3} color="#ff3030" />
     </>
   );
 };
