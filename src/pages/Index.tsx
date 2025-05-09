@@ -48,7 +48,7 @@ const Index = () => {
       {/* Sección Problema/Solución */}
       <ProblemSolutionSection />
       
-      {/* Nueva Sección del Cerebro 3D */}
+      {/* Sección del Cerebro 3D - Colocada entre Problem/Solution y ValueProp */}
       <BrainSection />
       
       {/* Sección Propuesta de Valor */}

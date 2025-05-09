@@ -40,13 +40,23 @@ const BrainScene = () => {
       // Obtener dimensiones y posición del contenedor
       const rect = containerRef.current.getBoundingClientRect();
       
+      // Verificar si el mouse está dentro del contenedor
+      if (
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom
+      ) {
+        return; // No actualizar si está fuera del contenedor
+      }
+      
       // Calcular posición normalizada del ratón relativa al centro del contenedor
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
       
       // Limitar valores extremos para evitar dispersión excesiva
-      const clampedX = Math.max(-1, Math.min(1, x));
-      const clampedY = Math.max(-1, Math.min(1, y));
+      const clampedX = Math.max(-0.8, Math.min(0.8, x));
+      const clampedY = Math.max(-0.8, Math.min(0.8, y));
       
       setMousePosition({ x: clampedX, y: clampedY });
     };
@@ -68,10 +78,10 @@ const BrainScene = () => {
       // En dispositivos táctiles, configurar una animación automática
       let frame: number;
       const animate = () => {
-        const time = Date.now() * 0.001;
-        // Simular movimiento circular del mouse
-        const x = Math.sin(time * 0.5) * 0.5;
-        const y = Math.cos(time * 0.5) * 0.5;
+        const time = Date.now() * 0.0005;
+        // Simular movimiento circular del mouse con valores más limitados
+        const x = Math.sin(time * 0.5) * 0.3;
+        const y = Math.cos(time * 0.5) * 0.3;
         setMousePosition({ x, y });
         frame = requestAnimationFrame(animate);
       };
@@ -109,6 +119,7 @@ const BrainScene = () => {
         left: 0,
         width: '100%',
         height: '100%',
+        background: '#030303', // Fondo más oscuro para mejor contraste
       }}
     >
       <Canvas
@@ -128,9 +139,9 @@ const BrainScene = () => {
           height: '100%',
         }}
       >
-        <ambientLight intensity={2.5} /> {/* Aumentada intensidad para mejor visibilidad */}
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={3.0} /> {/* Aumentada intensidad */}
-        <pointLight position={[-10, -10, -10]} intensity={2.8} /> {/* Aumentada intensidad */}
+        <ambientLight intensity={3.5} /> {/* Aumentada intensidad para mejor visibilidad */}
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={4.0} /> {/* Aumentada intensidad */}
+        <pointLight position={[-10, -10, -10]} intensity={3.8} /> {/* Aumentada intensidad */}
         
         <BrainParticles mousePosition={mousePosition} />
       </Canvas>
