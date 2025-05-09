@@ -2,13 +2,11 @@
 /**
  * @component ProblemSolutionSection
  * Sección que describe los problemas comunes y las soluciones ofrecidas por Havani
- * Incluye una animación 3D interactiva de cerebro con partículas
  */
 
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useIntersection } from '@/hooks/useIntersection';
-import BrainScene from '@/components/NeuronBrain/BrainScene';
 
 const ProblemSolutionSection = () => {
   const handleIntersection = (entry: IntersectionObserverEntry) => {
@@ -59,17 +57,12 @@ const ProblemSolutionSection = () => {
       id="problem-solution"
       className="relative bg-[#080811] min-h-[800px] overflow-hidden"
     >
-      {/* Contenedor para la animación 3D del cerebro */}
-      <div className="absolute inset-0 w-full h-full">
-        <BrainScene />
-      </div>
+      {/* Fondo con gradiente */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#060E15] to-[#080811] opacity-90"></div>
       
-      {/* Capa superpuesta semitransparente para mejorar legibilidad - opacidad reducida */}
-      <div className="absolute inset-0 bg-[#060E15] bg-opacity-30 backdrop-blur-[2px] z-10"></div>
-      
-      {/* Contenido principal - z-index incrementado para estar por encima del cerebro */}
+      {/* Contenido principal */}
       <motion.div
-        className="relative z-30 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-40"
+        className="relative z-10 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-40"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

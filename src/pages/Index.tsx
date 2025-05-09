@@ -1,3 +1,4 @@
+
 /**
  * @component Index - Página principal (Landing) de Havani
  * 
@@ -10,6 +11,7 @@ import { useEffect } from 'react';
 import HeroSection from '@/components/sections/Hero/HeroSection';
 import ValuePropSection from '@/components/sections/ValueProp/ValuePropSection';
 import ProblemSolutionSection from '@/components/sections/ProblemSolution/ProblemSolutionSection';
+import BrainSection from '@/components/sections/Brain/BrainSection';
 import ProcessSection from '@/components/sections/Process/ProcessSection';
 import FlagshipProductsSection from '@/components/sections/FlagshipProducts/FlagshipProductsSection';
 import ServicesSection from '@/components/sections/Services/ServicesSection';
@@ -43,11 +45,14 @@ const Index = () => {
       {/* Sección Hero - Implementada con el prompt específico */}
       <HeroSection />
       
-      {/* Sección Propuesta de Valor */}
-      <ValuePropSection />
-      
       {/* Sección Problema/Solución */}
       <ProblemSolutionSection />
+      
+      {/* Nueva Sección del Cerebro 3D */}
+      <BrainSection />
+      
+      {/* Sección Propuesta de Valor */}
+      <ValuePropSection />
       
       {/* Sección Proceso */}
       <ProcessSection />
@@ -75,15 +80,6 @@ const Index = () => {
       
       {/* Footer */}
       <FooterSection />
-      
-      {/* Aquí se añadirán el resto de secciones específicas */}
-      {/* Sección Características */}
-      {/* Sección Precios */}
-      {/* Sección FAQ */}
-      {/* Sección CTA */}
-      {/* Sección Equipo */}
-      {/* Sección Blog */}
-      {/* Sección Footer */}
     </div>
   );
 };
