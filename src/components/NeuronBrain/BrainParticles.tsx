@@ -71,11 +71,11 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       dispersedPositions[i * 3 + 1] = disperseVector.y * (1 + Math.random() * 0.5);
       dispersedPositions[i * 3 + 2] = disperseVector.z * (1 + Math.random() * 0.5);
       
-      // Color rojo neón intensificado con variación - Aumentada intensidad para maximizar visibilidad
-      const intensity = 1.2 + Math.random() * 0.5; // Mayor intensidad para mejor visibilidad
+      // Color rojo neón intensificado con brillo - Aumentada intensidad para maximizar visibilidad
+      const intensity = 1.8 + Math.random() * 0.5; // Mayor intensidad para mejor visibilidad
       colors[i * 3] = 1.0 * intensity; // R (rojo máximo)
-      colors[i * 3 + 1] = 0.2 * intensity; // G (reducido para un rojo más puro)
-      colors[i * 3 + 2] = 0.2 * intensity; // B (reducido para un rojo más puro)
+      colors[i * 3 + 1] = 0.1 * intensity; // G (reducido para un rojo más puro)
+      colors[i * 3 + 2] = 0.1 * intensity; // B (reducido para un rojo más puro)
       
       indices[i] = i;
     }
@@ -146,14 +146,6 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       groupRef.current.rotation.y += 0.005; // Rotación más rápida para que sea visible
     }
   });
-
-  // Verificar que el componente se monta y actualiza correctamente
-  useEffect(() => {
-    console.log("BrainParticles mounted with", PARTICLE_COUNT, "particles");
-    return () => {
-      console.log("BrainParticles unmounted");
-    };
-  }, []);
   
   return (
     <>
@@ -180,7 +172,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
             />
           </bufferGeometry>
           <pointsMaterial
-            size={0.2} // Partículas mucho más grandes para mejor visibilidad
+            size={0.3} // Partículas más grandes para mejor visibilidad
             vertexColors
             transparent
             opacity={1.0} 
@@ -190,9 +182,9 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       </group>
 
       {/* Luces adicionales para mejor visibilidad */}
-      <pointLight position={[10, 10, 10]} intensity={5} color="#ff3030" />
-      <pointLight position={[-10, -10, 10]} intensity={4} color="#ff1010" />
-      <pointLight position={[0, 0, 5]} intensity={3} color="#ff5050" />
+      <pointLight position={[10, 10, 10]} intensity={8} color="#ff3030" />
+      <pointLight position={[-10, -10, 10]} intensity={8} color="#ff1010" />
+      <pointLight position={[0, 0, 5]} intensity={6} color="#ff5050" />
     </>
   );
 };

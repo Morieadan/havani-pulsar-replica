@@ -40,16 +40,6 @@ const BrainScene = () => {
       // Obtener dimensiones y posición del contenedor
       const rect = containerRef.current.getBoundingClientRect();
       
-      // Verificar si el mouse está dentro del contenedor
-      if (
-        event.clientX < rect.left ||
-        event.clientX > rect.right ||
-        event.clientY < rect.top ||
-        event.clientY > rect.bottom
-      ) {
-        return; // No actualizar si está fuera del contenedor
-      }
-      
       // Calcular posición normalizada del ratón relativa al centro del contenedor
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -119,7 +109,7 @@ const BrainScene = () => {
         left: 0,
         width: '100%',
         height: '100%',
-        background: '#030303', // Fondo más oscuro para mejor contraste
+        background: 'black', // Cambiado a negro puro para mejor contraste
       }}
     >
       <Canvas
@@ -127,7 +117,7 @@ const BrainScene = () => {
         dpr={[1, 2]} // Optimizar rendimiento en dispositivos de alta densidad
         gl={{ 
           antialias: true,
-          alpha: true,
+          alpha: false, // Cambiado a false para mejor rendimiento y visibilidad
           powerPreference: 'high-performance',
           preserveDrawingBuffer: true
         }}
@@ -139,9 +129,9 @@ const BrainScene = () => {
           height: '100%',
         }}
       >
-        <ambientLight intensity={3.5} /> {/* Aumentada intensidad para mejor visibilidad */}
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={4.0} /> {/* Aumentada intensidad */}
-        <pointLight position={[-10, -10, -10]} intensity={3.8} /> {/* Aumentada intensidad */}
+        <ambientLight intensity={5.0} /> {/* Mayor intensidad */}
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={10.0} color="#ff3030" /> {/* Mayor intensidad y color más vivo */}
+        <pointLight position={[-10, -10, -10]} intensity={8.0} color="#ff1010" /> {/* Mayor intensidad y color más vivo */}
         
         <BrainParticles mousePosition={mousePosition} />
       </Canvas>

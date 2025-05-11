@@ -42,16 +42,16 @@ const Index = () => {
   
   return (
     <div className="flex flex-col min-h-screen bg-bg-body text-text-primary">
-      {/* Sección Hero - Implementada con el prompt específico */}
+      {/* Hero Section */}
       <HeroSection />
       
-      {/* Sección Problema/Solución */}
+      {/* Problem/Solution Section */}
       <ProblemSolutionSection />
       
-      {/* Sección del Cerebro 3D - Colocada entre Problem/Solution y ValueProp */}
+      {/* Brain Section - Colocada entre Problem/Solution y ValueProp */}
       <BrainSection />
       
-      {/* Sección Propuesta de Valor */}
+      {/* Value Proposition Section */}
       <ValuePropSection />
       
       {/* Sección Proceso */}

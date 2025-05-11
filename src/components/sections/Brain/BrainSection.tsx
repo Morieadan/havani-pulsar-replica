@@ -34,18 +34,18 @@ const BrainSection = () => {
     <section
       ref={sectionRef}
       id="brain-animation"
-      className="relative bg-[#080811] min-h-[600px] md:min-h-[700px] lg:min-h-[800px] overflow-hidden"
+      className="relative bg-black min-h-[600px] md:min-h-[700px] lg:min-h-[800px] overflow-hidden"
       aria-label="Visualización 3D del cerebro de IA"
     >
-      {/* Contenedor del cerebro 3D - Ahora como elemento principal, no como fondo */}
+      {/* Canvas container - full height and width */}
       <div className="absolute inset-0 w-full h-full z-10">
         <BrainScene />
       </div>
       
-      {/* Capa superpuesta para mejorar legibilidad del texto que pudiera agregarse */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0D0D11] z-20"></div>
+      {/* Overlay gradient for better text visibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 z-20"></div>
       
-      {/* Contenido (opcional) - Podría agregarse texto explicativo en el futuro */}
+      {/* Content with text */}
       <div className="relative z-30 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 py-32">
         <motion.div 
           initial={{ opacity: 0 }}
@@ -54,7 +54,7 @@ const BrainSection = () => {
           className="text-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Inteligencia Artificial Neuronal</h2>
-          <p className="text-xl text-white/80 max-w-[800px] mx-auto">
+          <p className="text-xl text-white/90 max-w-[800px] mx-auto">
             Nuestro cerebro de IA procesa millones de datos para ofrecerte soluciones precisas y efectivas.
           </p>
         </motion.div>
