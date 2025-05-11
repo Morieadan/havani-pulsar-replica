@@ -54,6 +54,9 @@ const BrainScene = () => {
     // Registrar evento global de movimiento del ratón
     window.addEventListener('mousemove', handleMouseMove);
     
+    // Establecer posición inicial para garantizar que se vea algo
+    setMousePosition({ x: 0.3, y: 0.3 });
+    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
@@ -103,35 +106,21 @@ const BrainScene = () => {
     <div 
       ref={setRefs}
       className="absolute inset-0 w-full h-full"
-      style={{ 
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        background: 'black', // Cambiado a negro puro para mejor contraste
-      }}
     >
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }}
+        camera={{ position: [0, 0, 7], fov: 60 }}
         dpr={[1, 2]} // Optimizar rendimiento en dispositivos de alta densidad
         gl={{ 
           antialias: true,
-          alpha: false, // Cambiado a false para mejor rendimiento y visibilidad
+          alpha: false,
           powerPreference: 'high-performance',
           preserveDrawingBuffer: true
         }}
-        style={{ 
-          position: 'absolute', 
-          top: 0, 
-          left: 0, 
-          width: '100%', 
-          height: '100%',
-        }}
       >
-        <ambientLight intensity={5.0} /> {/* Mayor intensidad */}
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={10.0} color="#ff3030" /> {/* Mayor intensidad y color más vivo */}
-        <pointLight position={[-10, -10, -10]} intensity={8.0} color="#ff1010" /> {/* Mayor intensidad y color más vivo */}
+        {/* Luces ambientales potentes para mejor visibilidad */}
+        <ambientLight intensity={8.0} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={20.0} color="#ff3030" />
+        <pointLight position={[-10, -10, -10]} intensity={15.0} color="#ff1010" />
         
         <BrainParticles mousePosition={mousePosition} />
       </Canvas>

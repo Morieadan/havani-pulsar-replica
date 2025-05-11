@@ -10,7 +10,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 // Número de partículas para renderizar el cerebro
-const PARTICLE_COUNT = 7500; // Reducido para mejor rendimiento
+const PARTICLE_COUNT = 10000; // Aumentado para mejor visibilidad
 // Distancia máxima de dispersión al alejar el cursor
 const MAX_DISPERSION = 5;
 // Velocidad de transición entre estados
@@ -45,7 +45,7 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       const phi = Math.acos((Math.random() * 2) - 1);
       
       // Radio base con variación para crear la forma del cerebro
-      const radius = 2.0 + Math.random() * 0.3; // Aumentado tamaño base
+      const radius = 2.5 + Math.random() * 0.5; // Aumentado tamaño base
       
       // Añadir distorsión para crear las "arrugas" y lóbulos del cerebro
       const noise = Math.sin(theta * 8) * 0.15 + Math.sin(phi * 6) * 0.15;
@@ -71,11 +71,11 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       dispersedPositions[i * 3 + 1] = disperseVector.y * (1 + Math.random() * 0.5);
       dispersedPositions[i * 3 + 2] = disperseVector.z * (1 + Math.random() * 0.5);
       
-      // Color rojo neón intensificado con brillo - Aumentada intensidad para maximizar visibilidad
-      const intensity = 1.8 + Math.random() * 0.5; // Mayor intensidad para mejor visibilidad
+      // Color rojo neón intensificado con brillo - Aumentada intensidad para máxima visibilidad
+      const intensity = 3.5 + Math.random() * 1.5; // Intensidad mucho mayor para mejor visibilidad
       colors[i * 3] = 1.0 * intensity; // R (rojo máximo)
-      colors[i * 3 + 1] = 0.1 * intensity; // G (reducido para un rojo más puro)
-      colors[i * 3 + 2] = 0.1 * intensity; // B (reducido para un rojo más puro)
+      colors[i * 3 + 1] = 0.05 * intensity; // G (reducido para un rojo más puro)
+      colors[i * 3 + 2] = 0.05 * intensity; // B (reducido para un rojo más puro)
       
       indices[i] = i;
     }
@@ -146,46 +146,45 @@ const BrainParticles = ({ mousePosition }: BrainParticlesProps) => {
       groupRef.current.rotation.y += 0.005; // Rotación más rápida para que sea visible
     }
   });
-  
-  return (
-    <>
-      {/* Grupo contenedor del cerebro */}
-      <group ref={groupRef}>
-        <points ref={particlesRef}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={PARTICLE_COUNT}
-              array={positions}
-              itemSize={3}
-            />
-            <bufferAttribute
-              attach="attributes-color"
-              count={PARTICLE_COUNT}
-              array={colors}
-              itemSize={3}
-            />
-            <bufferAttribute
-              attach="index"
-              array={indices}
-              itemSize={1}
-            />
-          </bufferGeometry>
-          <pointsMaterial
-            size={0.3} // Partículas más grandes para mejor visibilidad
-            vertexColors
-            transparent
-            opacity={1.0} 
-            sizeAttenuation
-          />
-        </points>
-      </group>
 
-      {/* Luces adicionales para mejor visibilidad */}
-      <pointLight position={[10, 10, 10]} intensity={8} color="#ff3030" />
-      <pointLight position={[-10, -10, 10]} intensity={8} color="#ff1010" />
-      <pointLight position={[0, 0, 5]} intensity={6} color="#ff5050" />
-    </>
+  return (
+    <group ref={groupRef}>
+      <points ref={particlesRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={PARTICLE_COUNT}
+            array={positions}
+            itemSize={3}
+          />
+          <bufferAttribute
+            attach="attributes-color"
+            count={PARTICLE_COUNT}
+            array={colors}
+            itemSize={3}
+          />
+          <bufferAttribute
+            attach="index"
+            array={indices}
+            itemSize={1}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.6} // Partículas mucho más grandes para mejor visibilidad
+          vertexColors
+          transparent
+          opacity={1.0} 
+          sizeAttenuation
+          alphaTest={0.01}
+          blending={THREE.AdditiveBlending} // Añadido para efecto de glow
+        />
+      </points>
+
+      {/* Luces potentes para mejorar visibilidad */}
+      <pointLight position={[10, 10, 10]} intensity={20} color="#ff3030" distance={25} decay={2} />
+      <pointLight position={[-10, -10, 10]} intensity={20} color="#ff1010" distance={25} decay={2} />
+      <pointLight position={[0, 0, 5]} intensity={15} color="#ff5050" distance={25} decay={2} />
+    </group>
   );
 };
 
