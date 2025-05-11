@@ -11,7 +11,7 @@ import { useIntersection } from '@/hooks/useIntersection';
 
 const BrainScene = () => {
   // Estado para rastrear la posición del ratón normalizada (-1 a 1)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 0.3, y: 0.3 });
   
   // Referencia al contenedor para calcular posiciones relativas
   const containerRef = useRef<HTMLDivElement>(null);
@@ -105,9 +105,18 @@ const BrainScene = () => {
   return (
     <div 
       ref={setRefs}
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0 w-full h-full bg-black" /* Agregar bg-black para asegurar el fondo */
+      style={{ zIndex: 10 }} /* Asegurar un z-index adecuado */
     >
+      {/* Fallback de emergencia - solo visible si Three.js no se renderiza */}
+      <div className="absolute inset-0 flex items-center justify-center z-[5] opacity-30">
+        <div className="bg-red-600 w-32 h-32 rounded-full animate-pulse">
+          <span className="text-white">Fallback</span>
+        </div>
+      </div>
+      
       <Canvas
+        className="z-10"
         camera={{ position: [0, 0, 7], fov: 60 }}
         dpr={[1, 2]} // Optimizar rendimiento en dispositivos de alta densidad
         gl={{ 

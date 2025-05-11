@@ -34,8 +34,9 @@ const BrainSection = () => {
     <section
       ref={sectionRef}
       id="brain-animation"
-      className="relative bg-black min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] overflow-hidden"
+      className="relative bg-black min-h-[800px] md:min-h-[900px] lg:min-h-[1000px] overflow-hidden w-full"
       aria-label="Visualización 3D del cerebro de IA"
+      style={{ position: 'relative', zIndex: 5 }} /* Asegurar que tenga un z-index adecuado */
     >
       {/* Contenedor del cerebro 3D - altura y ancho completos */}
       <div className="absolute inset-0 w-full h-full z-10">
@@ -47,6 +48,9 @@ const BrainSection = () => {
       
       {/* Degradado inferior para mejor visibilidad del texto */}
       <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-black via-black/80 to-transparent z-20"></div>
+      
+      {/* Elemento de debug para verificar posicionamiento - visible temporalmente */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 w-16 h-16 rounded-full z-50 opacity-20"></div>
       
       {/* Contenido con texto */}
       <div className="relative z-30 max-w-[1240px] mx-auto px-6 md:px-12 lg:px-24 h-full flex flex-col justify-center items-center">

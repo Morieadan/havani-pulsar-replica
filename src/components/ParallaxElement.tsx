@@ -9,6 +9,7 @@
 
 import { ReactNode, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+// Importar explícitamente ScrollTrigger y registrarlo
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Registrar el plugin ScrollTrigger

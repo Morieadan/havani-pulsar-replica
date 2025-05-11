@@ -1,7 +1,9 @@
+
+/* Eliminar la restricción de ancho máximo que está limitando los componentes */
 #root {
-  max-width: 1280px;
+  /* Eliminar max-width para permitir que el contenido ocupe toda la pantalla */
   margin: 0 auto;
-  padding: 2rem;
+  /* Eliminar el padding para no interferir con los componentes a pantalla completa */
   text-align: center;
 }
 
